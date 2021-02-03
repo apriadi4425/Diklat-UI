@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, } from 'react-router-dom';
 import AdminLTE, {
   Sidebar, AsyncComponent, Footer, Navbar,
 } from 'adminlte-2-react';
@@ -279,6 +279,10 @@ class App extends Component {
           </Entry>
           <Entry
             icon="fas-power-off"
+            onClick={() => {
+              localStorage.clear()
+              this.props.history.push('/login')
+            }}
           />
         </Navbar.Core>
         <Sidebar.Core>

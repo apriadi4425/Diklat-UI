@@ -50,7 +50,8 @@ const DataTables = () => {
               }}
               onClickEvents={{
                 onClickEvent: (data, rowIdx, rowData) => {
-                  debugger;
+                  
+                  console.log(data)
                 },
               }}
             />
