@@ -13,7 +13,11 @@ import user1Image from './assets/img/user1-128x128.jpg';
 import user2Image from './assets/img/user2-160x160.jpg';
 import user3Image from './assets/img/user3-128x128.jpg';
 import user4Image from './assets/img/user4-128x128.jpg';
+
 import UserPengguna from './pages/master/konfigurasi/UserPengguna';
+import Diklat from './pages/master/data/diklat/Diklat';
+import DetilDiklat from './pages/master/data/diklat/DetilDiklat';
+
 
 const { Item, Header } = Sidebar;
 const {
@@ -289,12 +293,11 @@ class App extends Component {
          
           <Header text="MAIN NAVIGATION" />
           <Item to="/app/beranda" text="Beranda" icon="fa-tachometer-alt"/>
-          
-          <Item text="Layout Options" icon="far-copy" labels={{ type: 'primary', text: 4 }}>
-            <Item text="Top Navigation" to="/top-nav" />
-            <Item text="Boxed" to="/boxed" />
-            <Item text="Fixed" to="/fixed" />
-            <Item text="Collapsed Sidebar" to="/collapsed-sidebar" />
+
+          <Item text="Master Data" icon="fa-chart-pie">
+            <Item text="Diklat" to="/app/master/diklat" />
+            <Item text="Morris" to="/morris" />
+            <Item text="Flot" to="/flot" />
           </Item>
 
 
@@ -366,6 +369,8 @@ class App extends Component {
         <ChartJS path="/app/chart-js" exact />
         <Widgets path="/app/widgets" exact />
         <UserPengguna path={'/app/konfigurasi-pengguna'}/>
+        <Diklat path={'/app/master/diklat'} exact/>
+        <DetilDiklat path={'/app/master/diklat/:slug'}/>
         
         {this.getAsync('/ui-elements/general')}
         {this.getAsync('/ui-elements/icons')}
