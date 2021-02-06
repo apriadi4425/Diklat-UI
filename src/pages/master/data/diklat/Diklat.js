@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import axios from 'axios'
 import moment from 'moment';
 
+
 const Diklat = ({history}) => {
     const Token = JSON.parse(localStorage.getItem('token'));
     const [modal, setmodal] = useState(false);
@@ -77,12 +78,20 @@ const Diklat = ({history}) => {
      }
 
 
+
+
+
+
+
+
+
      useEffect(() => {
         GetData();
      }, []);
 
     return(
         <div className='full-height'>
+           
             <Content title="Data Diklat">
                 <Alert closable type="info" title="Informasi Umum" icon="fa-info">Halaman ini untuk menmabahkan data diklat</Alert>
                 <Row>

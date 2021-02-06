@@ -17,3 +17,8 @@ code {
 .full-height {
   height: 105vh;  
 }
+
+.paling_atas {
+  background-color: green!important;
+  z-index: 9999!important;
+}

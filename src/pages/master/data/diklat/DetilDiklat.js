@@ -3,11 +3,15 @@ import {Content, Col, Row, Alert, Box, Button, Inputs} from 'adminlte-2-react';
 import ModalSuratTugas from './ModalSuratTugas';
 import ModalEditDiklat from './ModalEditDiklat';
 import ModalEditSuratTugas from './ModalEditSuratTugas';
+import ModalDokument from './ModalDokument';
+import { withRouter } from "react-router-dom";
 import axios from 'axios'
 import moment from 'moment';
 import swal from 'sweetalert';
 
-const DetilDiklat = ({match}) => {
+import ImageViewer from 'react-simple-image-viewer';
+
+const DetilDiklat = ({match, history}) => {
     const Token = JSON.parse(localStorage.getItem('token'));
     const slug = match.params.slug;
   
@@ -18,6 +22,11 @@ const DetilDiklat = ({match}) => {
     const [modalSuratTugas, setModalSuratTugas] = useState(false);
     const [modalEdit, setmodalEdit] = useState(false);
     const [modalEditSuratTugas, setmodalEditSuratTugas] = useState(false);
+    const [modalDokumen, setModalDokumen] = useState(false)
+
+    const togglemodalDokumen = useCallback(() => {
+        setModalDokumen(!modalDokumen)
+    }, [modalDokumen]);
 
     const TogleModalSuratTugas = useCallback(() => {
         setModalSuratTugas(!modalSuratTugas)
@@ -59,7 +68,7 @@ const DetilDiklat = ({match}) => {
         });
     }
 
-    const PeringatanHapus = (IdSuratTugas) => {
+    const PeringatanHapus = (Metode, IdSuratTugas) => {
         swal({
             title: "Data Akan Dihapus",
             text: "ketika dihapus data tidak akan bisa dikembalikan",
@@ -69,16 +78,20 @@ const DetilDiklat = ({match}) => {
           })
           .then((willDelete) => {
             if (willDelete) {
-                DeleteSuratTugas(IdSuratTugas)
+                if(Metode === 'Surat Tugas'){
+                    KirimDelete('surat-tugas', IdSuratTugas, Metode)
+                }else{
+                    KirimDelete('diklat', IdSuratTugas, Metode)
+                }
             } else {
               swal("Data tidak jadi dihapus");
             }
           });
     }
 
-    const DeleteSuratTugas = async (IdSuratTugas) => {
+    const KirimDelete = async (Link, Id, Metode) => {
         setLoading(true)
-        await axios.delete(`${process.env.REACT_APP_BASE_URL}/api/surat-tugas/${IdSuratTugas}`,{
+        await axios.delete(`${process.env.REACT_APP_BASE_URL}/api/${Link}/${Id}`,{
             headers: {
                 Accept: 'application/json',
                 Authorization: `Bearer ${Token}`
@@ -87,7 +100,11 @@ const DetilDiklat = ({match}) => {
             swal("Data berhasil dihapus", {
                 icon: "success",
               });
-            GetData();
+                if(Metode === 'Surat Tugas'){
+                    GetData();
+                }else{
+                    history.push('/app/master/diklat')
+                }
         }).catch(err => {
             console.log(err)
         });
@@ -100,15 +117,69 @@ const DetilDiklat = ({match}) => {
         GetUsers();
     }, []);
 
+
+
+
+    const [currentImage, setCurrentImage] = useState(0);
+    const [isViewerOpen, setIsViewerOpen] = useState(false);
+    const [images, setimages] = useState([]);
+
+
+    const bukaHalamanPdf = async (idDokument) => {
+       await axios.get(`${process.env.REACT_APP_BASE_URL}/api/get-halaman?id_dokument=${idDokument}`,{
+         headers: {
+             Accept: 'application/json',
+             Authorization: `Bearer ${Token}`
+         }
+       }).then(res => {
+         togglemodalDokumen()
+         setimages(res.data)
+         openImageViewer(0)
+       }).catch(err => {
+           console.log(err)
+       });
+   }
+
+
+
+   const openImageViewer = useCallback((index) => {
+       setCurrentImage(index);
+       setIsViewerOpen(true);
+     }, []);
+   
+     const closeImageViewer = () => {
+       setCurrentImage(0);
+       togglemodalDokumen();
+       setIsViewerOpen(false);
+     };
+
+
+
     return(
         <div className='full-height'>
+             <div className='paling_atas'>
+             {isViewerOpen && (
+                    <ImageViewer
+                    style={{height : 5000}}
+                    src={ images }
+                    currentIndex={ currentImage }
+                    onClose={ closeImageViewer }
+                    backgroundStyle={{
+                        backgroundColor: "rgba(0,0,0,0.9)",
+                        zIndex:9999
+                    }}
+                    />
+                )}
+             </div>
             <Content title="Detil Diklat">
             <Row>
                 <Col md={12}>
                     <Box title={!Loading ? Data.nama_diklat : "Loading Data...."}  customOptions={
                         <div>
                             <button className='btn btn-info btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={() => setModalSuratTugas(true)}>Buat Surat Tugas</button>
-                            <button className='btn btn-success btn-sm' style={{marginTop : 2}} onClick={TogleModalEditDiklat}>Ubah Diklat</button>
+                            <button className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={TogleModalEditDiklat}>Ubah Diklat</button>
+                            <button className='btn btn-primary btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={togglemodalDokumen}>Dokument</button>
+                            <button className='btn btn-danger btn-sm' style={{marginTop : 2}} onClick={() => PeringatanHapus('Diklat', Data.id)}>Hapus Diklat</button>
                         </div>
                     }>
                         {
@@ -191,7 +262,8 @@ const DetilDiklat = ({match}) => {
                                         })
                                         TogleModalEditSuratTugas();
                                     }}>Ubah Data Surat Tugas</button>
-                                    <button onClick={() => PeringatanHapus(list.id)} className='btn btn-danger btn-sm' style={{marginTop : 2, marginRight : '10px'}}>Hapus</button>
+                                   
+                                    <button onClick={() => PeringatanHapus('Surat Tugas',list.id)} className='btn btn-danger btn-sm' style={{marginTop : 2, marginRight : '10px'}}>Hapus</button>
                                 </div>
                             }>
                                 
@@ -238,10 +310,11 @@ const DetilDiklat = ({match}) => {
                     <ModalSuratTugas GetData={GetData} IdDiklat={Data.id} Users={Users} modal={modalSuratTugas} TogleModalSuratTugas={TogleModalSuratTugas}/>
                     <ModalEditDiklat GetData={GetData} Data={Data} modal={modalEdit} TogleModalEditDiklat={TogleModalEditDiklat}/>
                     <ModalEditSuratTugas Users={Users} GetData={GetData} Data={DataSuratTugas} setDataSuratTugas={setDataSuratTugas} modal={modalEditSuratTugas} TogleModalEditSuratTugas={TogleModalEditSuratTugas}/>
+                    <ModalDokument bukaHalamanPdf={bukaHalamanPdf} IdDiklat={Data.id} toggle={togglemodalDokumen} modal={modalDokumen}/>
                 </React.Fragment>
             }
         </div>
     )
 }
 
-export default DetilDiklat;
+export default withRouter(DetilDiklat);

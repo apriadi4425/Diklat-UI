@@ -36,7 +36,7 @@ const ModalEditSuratTugasKomponent = ({Users, GetData, Data, setDataSuratTugas, 
     }
 
     return(
-        <Content title={'Tambah Acara Diklat'} modal onHide={TogleModalEditSuratTugas} modalFooter={
+        <Content title={'Tambah Acara Diklat'} modal  onHide={TogleModalEditSuratTugas} modalFooter={
                     <React.Fragment>
                         <Button text='Tutup' pullLeft onClick={TogleModalEditSuratTugas} />
                         <Button disabled={Loading} text={!Loading ? 'Ubah Data' : 'Loading...'} onClick={UbahSuratTugas}/>
