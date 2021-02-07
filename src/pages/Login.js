@@ -1,12 +1,13 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useContext} from 'react';
 import {withRouter, Redirect} from 'react-router-dom'
 import axios from 'axios';
 import './login.css';
 import swal from 'sweetalert';
+import { GlobalStateContext } from '../GlobalState';
 
 
 const Login = ({history}) => {
-
+    const {setOtoritas} = useContext(GlobalStateContext)
     const [Form, SetForm] = useState({
         email : '', password : ''
       });
@@ -37,6 +38,7 @@ const Login = ({history}) => {
           localStorage.setItem('login', true);
           localStorage.setItem('user', JSON.stringify(res.data.user));
           localStorage.setItem('token', JSON.stringify(res.data.token));
+          setOtoritas(res.data.user.otoritas)
           history.push('/app/beranda')
         console.log(res.data)
         }).catch(function (error) {

@@ -1,11 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Content, Col, Row, DataTable, Alert, Box, Button, Inputs} from 'adminlte-2-react';
 import { withRouter } from "react-router-dom";
 import axios from 'axios'
 import moment from 'moment';
+import { GlobalStateContext } from '../../../../GlobalState';
+
 
 
 const Diklat = ({history}) => {
+    const {Otoritas} = useContext(GlobalStateContext)
     const Token = JSON.parse(localStorage.getItem('token'));
     const [modal, setmodal] = useState(false);
     const [Data, setData] = useState([])
@@ -78,13 +81,6 @@ const Diklat = ({history}) => {
      }
 
 
-
-
-
-
-
-
-
      useEffect(() => {
         GetData();
      }, []);
@@ -97,7 +93,7 @@ const Diklat = ({history}) => {
                 <Row>
                     <Col md={12}>
                     <Box title="Daftar Diklat" customOptions={
-                        <div><button className='btn btn-info btn-sm' style={{marginTop : 2}} onClick={() => setmodal(true)}>Tambah Diklat</button></div>
+                        Otoritas === 1 ? <div><button className='btn btn-info btn-sm' style={{marginTop : 2}} onClick={() => setmodal(true)}>Tambah Diklat</button></div> : null
                     }>
 
                         <div className={'table-responsive'}>

@@ -1,10 +1,12 @@
-import React, {useState, useCallback, useEffect} from 'react'
+import React, {useState, useCallback, useEffect, useContext} from 'react'
 import {useDropzone} from 'react-dropzone'
 import {Box} from 'adminlte-2-react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { GlobalStateContext } from '../../../../../GlobalState';
 
 const DokumentasiAcaraTabsKomponent = ({IdDiklat}) => {
+    const {Otoritas} = useContext(GlobalStateContext)
     const Token = JSON.parse(localStorage.getItem('token'));
     const [DoUpload, setDoUpload] = useState(false)
     const [Form, SetForm] = useState({
@@ -108,7 +110,10 @@ const DokumentasiAcaraTabsKomponent = ({IdDiklat}) => {
     return(
             <Box customOptions={
                 <div>
-                    <button onClick={() => setDoUpload(!DoUpload)} className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : '10px'}} >{!DoUpload ? 'Upload Dokument' : 'Batalkan'}</button>
+                  {
+                    Otoritas === 1 ? <button onClick={() => setDoUpload(!DoUpload)} className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : '10px'}} >{!DoUpload ? 'Upload Dokument' : 'Batalkan'}</button> : null
+                  }
+                    
                     {
                         Form.nama_file !== '' ?
                         <button disabled={LoadingButtonUpload}  onClick={TambahFile} className='btn btn-warning btn-sm' style={{marginTop : 2, marginRight : '10px'}} >{!LoadingButtonUpload ? 'Upload' : 'Loading'}</button> : null
@@ -138,10 +143,11 @@ const DokumentasiAcaraTabsKomponent = ({IdDiklat}) => {
                               DataDokument.map((list, index) => 
                               <tr key={index}>
                                     <td >
-                                      <button onClick={() => PeringatanHapus(list.id)} className='btn btn-sm btn-danger tombol_hapus2'>Hapus</button>
+                                      {
+                                        Otoritas === 1 ? <button onClick={() => PeringatanHapus(list.id)} className='btn btn-sm btn-danger tombol_hapus2'>Hapus</button> : null
+                                      }
                                       <img className='img img-thumbnail gambar_nya2' src={`${process.env.REACT_APP_BASE_URL}/dokument/dokumentasi/${list.path_url}`}/>
                                       <p className='title_bawah2'>{list.nama_file}</p>
-            
                                     </td>
                               </tr>
                               )}

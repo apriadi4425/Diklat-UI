@@ -5,7 +5,7 @@ import SuratTugasTabs from './Tabs/SuratTugasTabs';
 import DokumentasiAcaraTabs from './Tabs/DokumentasiAcaraTabs';
 import './Tabs/styletabs.css';
 
-const ModalDokumentKomponen = ({modal, toggle, IdDiklat, bukaHalamanPdf}) => {
+const ModalDokumentKomponen = ({Users, modal, toggle, IdDiklat, bukaHalamanPdf}) => {
     
     return (
         <Content title={'Dokument Diklat'} modal modalSize='lg' modalFooter={
@@ -14,13 +14,13 @@ const ModalDokumentKomponen = ({modal, toggle, IdDiklat, bukaHalamanPdf}) => {
             </React.Fragment> } show={modal}>
             <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Surat Tugas">
-                    <SuratTugasTabs TipeDokument={1} IdDiklat={IdDiklat} bukaHalamanPdf={bukaHalamanPdf}/>
+                    <SuratTugasTabs Users={Users} TipeDokument={1} IdDiklat={IdDiklat} bukaHalamanPdf={bukaHalamanPdf}/>
                 </Tab>
                 <Tab eventKey={2} title="Dokumentasi Acara">
                     <DokumentasiAcaraTabs IdDiklat={IdDiklat}/>
                 </Tab>
                 <Tab eventKey={3} title="Piagam/Sertifikat">
-                    <SuratTugasTabs TipeDokument={3} IdDiklat={IdDiklat} bukaHalamanPdf={bukaHalamanPdf}/>
+                    <SuratTugasTabs Users={Users} TipeDokument={3} IdDiklat={IdDiklat} bukaHalamanPdf={bukaHalamanPdf}/>
                 </Tab>
             </Tabs>
         </Content>

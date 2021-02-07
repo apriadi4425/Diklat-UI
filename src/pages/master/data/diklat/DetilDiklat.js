@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import {Content, Col, Row, Alert, Box, Button, Inputs} from 'adminlte-2-react';
 import ModalSuratTugas from './ModalSuratTugas';
 import ModalEditDiklat from './ModalEditDiklat';
@@ -10,8 +10,10 @@ import moment from 'moment';
 import swal from 'sweetalert';
 
 import ImageViewer from 'react-simple-image-viewer';
+import { GlobalStateContext } from '../../../../GlobalState';
 
 const DetilDiklat = ({match, history}) => {
+    const {Otoritas} = useContext(GlobalStateContext)
     const Token = JSON.parse(localStorage.getItem('token'));
     const slug = match.params.slug;
   
@@ -175,12 +177,15 @@ const DetilDiklat = ({match, history}) => {
             <Row>
                 <Col md={12}>
                     <Box title={!Loading ? Data.nama_diklat : "Loading Data...."}  customOptions={
+                        Otoritas === 1 ?
                         <div>
                             <button className='btn btn-info btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={() => setModalSuratTugas(true)}>Buat Surat Tugas</button>
                             <button className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={TogleModalEditDiklat}>Ubah Diklat</button>
                             <button className='btn btn-primary btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={togglemodalDokumen}>Dokument</button>
                             <button className='btn btn-danger btn-sm' style={{marginTop : 2}} onClick={() => PeringatanHapus('Diklat', Data.id)}>Hapus Diklat</button>
                         </div>
+                        : 
+                        <button className='btn btn-primary btn-sm' style={{marginTop : 2}} onClick={togglemodalDokumen}>Dokument Diklat</button>
                     }>
                         {
                             Loading ?
@@ -248,23 +253,28 @@ const DetilDiklat = ({match, history}) => {
                             <Box title={list.nomor_surat_tugas}  customOptions={
                                 <div>
                                     <a href={`${process.env.REACT_APP_BASE_URL}/cetak-surat-tugas?id=${list.id}`} className='btn btn-info btn-sm' style={{marginTop : 2, marginRight : '10px'}}>Cetak Surat Tugas</a>
-                                    <button className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : '10px'}} onClick={() => {
-                                        let pesertanya = [];
-                                        for(var i = 0; i < list.peserta.length; i++){
-                                            pesertanya.push(list.peserta[i].user.name)
-                                        }
-                                        setDataSuratTugas({
-                                            id_diklat : Data.id,
-                                            id : list.id,
-                                            nomor_surat_tugas : list.nomor_surat_tugas, 
-                                            tanggal_surat_tugas : list.tanggal_surat_tugas,
-                                            peserta : pesertanya
-                                        })
-                                        TogleModalEditSuratTugas();
-                                    }}>Ubah Data Surat Tugas</button>
-                                   
-                                    <button onClick={() => PeringatanHapus('Surat Tugas',list.id)} className='btn btn-danger btn-sm' style={{marginTop : 2, marginRight : '10px'}}>Hapus</button>
-                                </div>
+                                    {
+                                        Otoritas === 1 ?
+                                        <React.Fragment>
+                                            <button className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : '10px'}} onClick={() => {
+                                                let pesertanya = [];
+                                                for(var i = 0; i < list.peserta.length; i++){
+                                                    pesertanya.push(list.peserta[i].user.name)
+                                                }
+                                                setDataSuratTugas({
+                                                    id_diklat : Data.id,
+                                                    id : list.id,
+                                                    nomor_surat_tugas : list.nomor_surat_tugas, 
+                                                    tanggal_surat_tugas : list.tanggal_surat_tugas,
+                                                    peserta : pesertanya
+                                                })
+                                                TogleModalEditSuratTugas();
+                                            }}>Ubah Data Surat Tugas</button>
+                                        
+                                            <button onClick={() => PeringatanHapus('Surat Tugas',list.id)} className='btn btn-danger btn-sm' style={{marginTop : 2, marginRight : '10px'}}>Hapus</button>
+                                        </React.Fragment> : null
+                                    }
+                                    </div>
                             }>
                                 
                                     <Col md={12}>
@@ -310,7 +320,7 @@ const DetilDiklat = ({match, history}) => {
                     <ModalSuratTugas GetData={GetData} IdDiklat={Data.id} Users={Users} modal={modalSuratTugas} TogleModalSuratTugas={TogleModalSuratTugas}/>
                     <ModalEditDiklat GetData={GetData} Data={Data} modal={modalEdit} TogleModalEditDiklat={TogleModalEditDiklat}/>
                     <ModalEditSuratTugas Users={Users} GetData={GetData} Data={DataSuratTugas} setDataSuratTugas={setDataSuratTugas} modal={modalEditSuratTugas} TogleModalEditSuratTugas={TogleModalEditSuratTugas}/>
-                    <ModalDokument bukaHalamanPdf={bukaHalamanPdf} IdDiklat={Data.id} toggle={togglemodalDokumen} modal={modalDokumen}/>
+                    <ModalDokument Users={Users} bukaHalamanPdf={bukaHalamanPdf} IdDiklat={Data.id} toggle={togglemodalDokumen} modal={modalDokumen}/>
                 </React.Fragment>
             }
         </div>
