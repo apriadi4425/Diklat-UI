@@ -173,16 +173,16 @@ const DetilDiklat = ({match, history}) => {
                     />
                 )}
              </div>
-            <Content title="Detil Diklat">
+            <Content title="Detil Kegiatan">
             <Row>
                 <Col md={12}>
                     <Box title={!Loading ? Data.nama_diklat : "Loading Data...."}  customOptions={
-                        Otoritas === 1 ?
+                        Otoritas == 1 ?
                         <div>
                             <button className='btn btn-info btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={() => setModalSuratTugas(true)}>Buat Surat Tugas</button>
-                            <button className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={TogleModalEditDiklat}>Ubah Diklat</button>
+                            <button className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={TogleModalEditDiklat}>Ubah Kegiatan</button>
                             <button className='btn btn-primary btn-sm' style={{marginTop : 2, marginRight : 5}} onClick={togglemodalDokumen}>Dokument</button>
-                            <button className='btn btn-danger btn-sm' style={{marginTop : 2}} onClick={() => PeringatanHapus('Diklat', Data.id)}>Hapus Diklat</button>
+                            <button className='btn btn-danger btn-sm' style={{marginTop : 2}} onClick={() => PeringatanHapus('Diklat', Data.id)}>Hapus Kegiatan</button>
                         </div>
                         : 
                         <button className='btn btn-primary btn-sm' style={{marginTop : 2}} onClick={togglemodalDokumen}>Dokument Diklat</button>
@@ -193,6 +193,11 @@ const DetilDiklat = ({match, history}) => {
                             <React.Fragment>
                                 <table>
                                     <tbody>
+                                    <tr>
+                                            <td style={{width : '200px'}}>Jenis Kegiatan</td>
+                                            <td style={{width : '10px'}}>:</td>
+                                            <td>{Data.jenis_kegiatan}</td>
+                                        </tr>
                                         <tr>
                                             <td style={{width : '200px'}}>Asal Surat Undangan</td>
                                             <td style={{width : '10px'}}>:</td>
@@ -254,7 +259,7 @@ const DetilDiklat = ({match, history}) => {
                                 <div>
                                     <a href={`${process.env.REACT_APP_BASE_URL}/cetak-surat-tugas?id=${list.id}`} className='btn btn-info btn-sm' style={{marginTop : 2, marginRight : '10px'}}>Cetak Surat Tugas</a>
                                     {
-                                        Otoritas === 1 ?
+                                        Otoritas == 1 ?
                                         <React.Fragment>
                                             <button className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : '10px'}} onClick={() => {
                                                 let pesertanya = [];

@@ -8,6 +8,7 @@ const ModalEditDiklatKomponent = ({GetData, modal, Data, TogleModalEditDiklat}) 
     const [Form, setForm] = useState({
         id : Data.id,
         nama_diklat: Data.nama_diklat,
+        jenis_kegiatan : Data.jenis_kegiatan,
         asal_surat_undangan: Data.asal_surat_undangan,
         perihal_undangan: Data.perihal_undangan,
         nomor_surat_undangan: Data.nomor_surat_undangan,
@@ -58,7 +59,8 @@ const ModalEditDiklatKomponent = ({GetData, modal, Data, TogleModalEditDiklat}) 
                     </React.Fragment>
                 } show={modal}>
 
-                    <Text name="nama_diklat" value={Form.nama_diklat} onChange={(e) =>setForm({...Form, nama_diklat : e.target.value})}   placeholder="Masukan nama diklat" label="Nama Diklat" labelPosition="above" />
+                    <Text name="nama_diklat" value={Form.nama_diklat} onChange={(e) =>setForm({...Form, nama_diklat : e.target.value})}   placeholder="Masukan nama kegiatan" label="Nama Kegiatan" labelPosition="above" />
+                    <Text name="jenis_kegiatan" value={Form.jenis_kegiatan} onChange={(e) =>setForm({...Form, jenis_kegiatan : e.target.value})}   placeholder="Masukan jenis kegiatan" label="Jenis Kegiatan" labelPosition="above" />
                     <Text name="asal_surat_undangan" value={Form.asal_surat_undangan} onChange={(e) =>setForm({...Form, asal_surat_undangan : e.target.value})}  placeholder="Masukan Asal Surat Undangan" label="Asal Surat Undangan" labelPosition="above" />
                     <Text name="nomor_surat_undangan" value={Form.nomor_surat_undangan} onChange={(e) =>setForm({...Form, nomor_surat_undangan : e.target.value})}  placeholder="Masukan Nomor Surat Undangan" label="Nomor Surat Undangan" labelPosition="above" />
 

@@ -111,7 +111,7 @@ const DokumentasiAcaraTabsKomponent = ({IdDiklat}) => {
             <Box customOptions={
                 <div>
                   {
-                    Otoritas === 1 ? <button onClick={() => setDoUpload(!DoUpload)} className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : '10px'}} >{!DoUpload ? 'Upload Dokument' : 'Batalkan'}</button> : null
+                    Otoritas == 1 ? <button onClick={() => setDoUpload(!DoUpload)} className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : '10px'}} >{!DoUpload ? 'Upload Dokument' : 'Batalkan'}</button> : null
                   }
                     
                     {
@@ -144,7 +144,7 @@ const DokumentasiAcaraTabsKomponent = ({IdDiklat}) => {
                               <tr key={index}>
                                     <td >
                                       {
-                                        Otoritas === 1 ? <button onClick={() => PeringatanHapus(list.id)} className='btn btn-sm btn-danger tombol_hapus2'>Hapus</button> : null
+                                        Otoritas == 1 ? <button onClick={() => PeringatanHapus(list.id)} className='btn btn-sm btn-danger tombol_hapus2'>Hapus</button> : null
                                       }
                                       <img className='img img-thumbnail gambar_nya2' src={`${process.env.REACT_APP_BASE_URL}/dokument/dokumentasi/${list.path_url}`}/>
                                       <p className='title_bawah2'>{list.nama_file}</p>

@@ -39,6 +39,9 @@ class DashboardV2 extends Component {
     const { showInfoModal, infoModalText } = this.state;
     return (
       <div className='full-height'>
+        <div className='untuk_menutupi text-center'>
+          <p className='text_judul'>PTUN-DIKLAT</p>
+        </div>
       <Content title="Beranda" subTitle="Versi 1.0.0">
         <div onClick={() => this.showInfoModal(alert)}>
           <Alert closable type="info" title="Informasi Halaman" icon="fa-info">Halaman ini untuk melihat analisa keseluruhan data aplikasi</Alert>
@@ -50,7 +53,7 @@ class DashboardV2 extends Component {
         <Row>
           <Col md={12}>
             <Box
-              title="Peserta sedang diklat"
+              title="Pegawai sedang mengikuti kegiatan"
               collapsable
               closable
               options={<ul />}

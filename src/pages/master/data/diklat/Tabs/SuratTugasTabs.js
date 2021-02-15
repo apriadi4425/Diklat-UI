@@ -117,7 +117,7 @@ const SuratTugasTabsKomponent = ({Users, TipeDokument, IdDiklat, bukaHalamanPdf}
            <Box customOptions={
                 <div>
                   {
-                    Otoritas === 1 ? 
+                    Otoritas == 1 ? 
                     <button onClick={() => setDoUpload(!DoUpload)} className='btn btn-success btn-sm' style={{marginTop : 2, marginRight : '10px'}} >{!DoUpload ? 'Upload Dokument' : 'Batalkan'}</button> : null
                   }
                     
@@ -178,7 +178,7 @@ const SuratTugasTabsKomponent = ({Users, TipeDokument, IdDiklat, bukaHalamanPdf}
                                       <div className='tombol_box_nya'>
                                         <a href={`${process.env.REACT_APP_BASE_URL}/dokument/${TipeDokument === 1 ? 'surat-tugas' : 'sertifikat'}/${list.path_url}`} target="_blank" style={{marginRight : '10px'}} className='btn btn-sm btn-success'>Download</a>
                                         {
-                                          Otoritas === 1 ? <button onClick={() => PeringatanHapus(list.id)} className='btn btn-sm btn-danger tombol_hapus'>Hapus</button> : null
+                                          Otoritas == 1 ? <button onClick={() => PeringatanHapus(list.id)} className='btn btn-sm btn-danger tombol_hapus'>Hapus</button> : null
                                         }
                                         
                                       </div>

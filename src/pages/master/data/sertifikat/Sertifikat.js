@@ -42,6 +42,7 @@ const Sertifikat = () => {
     const firstColumns = [
         { title: 'Nama', data: 'nama'},
         { title: 'Nama Diklat', data: 'nama_diklat'},
+        { title: 'Penyelenggara', data: 'penyelenggara'},
         { title: 'Tgl. Diklat', data: 'tanggal_diklat' },
     ];
 
@@ -54,7 +55,6 @@ const Sertifikat = () => {
             }
         }).then(res => {
             setData(res.data)
-            console.log(res.data)
         }).catch(err => {
             console.log(err)
         });

@@ -5,6 +5,7 @@ import axios from 'axios';
 const TableSedangDiklatKomponent = () => {
     const Token = JSON.parse(localStorage.getItem('token'));
     const [Data, setData] = useState([]);
+    const [DataJenis, setDataJenis] = useState([])
     const [Loading, setLoading] = useState(true)
 
     const GetData = useCallback(async () => {
@@ -14,8 +15,8 @@ const TableSedangDiklatKomponent = () => {
               Authorization: `Bearer ${Token}`
           }
         }).then(res => {
-            setData(res.data)
-            console.log(res.data)
+            setData(res.data[0])
+            setDataJenis(res.data[1])
         }).catch(err => {
             console.log(err)
         });
@@ -34,14 +35,36 @@ const TableSedangDiklatKomponent = () => {
                         columns={[
                             { title: '#', data: 'no', width: '10px' },
                             { title: 'Nama Peserta', data: 'nama_peserta' },
-                            { title: 'Nama Diklat', data: 'nama_diklat'},
-                            { title: 'Tempat Diklat', data: 'tempat_diklat'},
-                            { title: 'Tanggal Diklat', data: 'tanggal_diklat'},
+                            { title: 'Nama Kegiatan', data: 'nama_diklat'},
+                            { title: 'Tempat Kegiatan', data: 'tempat_diklat'},
+                            { title: 'Tanggal Kegiatan', data: 'tanggal_diklat'},
                         ]}
                         data={Data}
                         border
                     />
+
+<h4>Jumlah Pegawai yang ikut kegiatan</h4>
+                <SimpleTable
+                        columns={[
+                            { title: 'Jenis Kegiatan', data: 'jenis_kegiatan' },
+                            { title: 'Januari', data: 'Januari' },
+                            { title: 'Februari', data: 'Februari' },
+                            { title: 'Maret', data: 'Maret' },
+                            { title: 'April', data: 'April' },
+                            { title: 'Mei', data: 'Mei' },
+                            { title: 'Juni', data: 'Juni' },
+                            { title: 'Juli', data: 'Juli' },
+                            { title: 'Agustus', data: 'Agustus' },
+                            { title: 'September', data: 'September' },
+                            { title: 'Oktober', data: 'Oktober' },
+                            { title: 'November', data: 'November' },
+                            { title: 'Desember', data: 'Desember' },
+                        ]}
+                        data={DataJenis}
+                        border
+                    />
             </div>
+            
         )
 }
 

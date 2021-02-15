@@ -18,58 +18,61 @@ import { GlobalStateContext } from './GlobalState';
 
 const { Item, Header } = Sidebar;
 const { Entry } = Navbar;
-const App = ({history}) => {
-    const {Otoritas, setOtoritas} = useContext(GlobalStateContext)
-    return (
-      <AdminLTE title={['PTUN']} browserTitle="Aplikasi" theme="black" footer={<Footer />}>
-        <Navbar.Core>
-          <Entry
-            icon="fas-power-off"
-            onClick={() => {
-              localStorage.clear()
-              setOtoritas(0);
-              history.push('/login')
-            }}
-          />
-        </Navbar.Core>
-        <Sidebar.Core>
-         
-          <Header text="MAIN NAVIGATION" />
-          <Item to="/app/beranda" text="Beranda" icon="fa-tachometer-alt"/>
+const App = ({ history }) => {
+  const { Otoritas, setOtoritas } = useContext(GlobalStateContext);
+  return (
+    <AdminLTE title={['PTUN']} browserTitle="Aplikasi" theme="black" footer={<Footer />}>
 
-          <Item text="Master Data" icon="fa-chart-pie">
-            <Item text="Diklat" to="/app/master/diklat" />
-            <Item text={Otoritas === 1 ? "Sertifikat Peserta" : "Sertifikat Saya"} to="/app/master/sertifikat" />
-          </Item>
+      <Navbar.Core>
+        <Entry
+          icon="fas-power-off"
+          onClick={() => {
+            localStorage.clear();
+            setOtoritas(0);
+            history.push('/login');
+          }}
+        />
+      </Navbar.Core>
+      <Sidebar.Core>
+
+        <Header text="MAIN NAVIGATION" />
+        <Item to="/app/beranda" text="Beranda" icon="fa-tachometer-alt" />
+
+        <Item text="Master Data" icon="fa-chart-pie">
+          <Item text="Kegiatan" to="/app/master/diklat" />
+          <Item text={Otoritas == 1 ? 'Sertifikat Peserta' : 'Sertifikat Saya'} to="/app/master/sertifikat" />
+        </Item>
 
 
-          <Header text="KONFIGURASI" />
-          {
-            Otoritas === 1 ? 
-            <React.Fragment>
-              <Item to="/app/konfigurasi-pengguna" text="User Pengguna" icon="fa-users"/>
-              <Item to="/app/konfigurasi" text="Konfigurasi Aplikasi" icon="fa-cogs"/> 
-            </React.Fragment> : 
-           null
+        <Header text="KONFIGURASI" />
+        {
+            Otoritas == 1
+              ? (
+                <React.Fragment>
+                  <Item to="/app/konfigurasi-pengguna" text="User Pengguna" icon="fa-users" />
+                  <Item to="/app/konfigurasi" text="Konfigurasi Aplikasi" icon="fa-cogs" />
+                </React.Fragment>
+              )
+              : null
           }
-           <Item to="/app/profile-saya" text="Profile Saya" icon="fa-user"/>
-          
+        <Item to="/app/profile-saya" text="Profile Saya" icon="fa-user" />
 
-        </Sidebar.Core>
-        <Index path="/app" exact />
 
-        <DashboardV2 path="/app/beranda" />
-        <ChartJS path="/app/chart-js" exact />
-        <Widgets path="/app/widgets" exact />
-        <UserPengguna path={'/app/konfigurasi-pengguna'}/>
-        <Diklat path={'/app/master/diklat'} exact/>
-        <DetilDiklat path={'/app/master/diklat/:slug'}/>
-        <Sertifikat path={'/app/master/sertifikat'}/>
-        <Aplikasi path={'/app/konfigurasi'}/>
-        <MyProfile path={'/app/profile-saya'}/>
-        
-      </AdminLTE>
-    );
-}
+      </Sidebar.Core>
+      <Index path="/app" exact />
+
+      <DashboardV2 path="/app/beranda" />
+      <ChartJS path="/app/chart-js" exact />
+      <Widgets path="/app/widgets" exact />
+      <UserPengguna path="/app/konfigurasi-pengguna" />
+      <Diklat path="/app/master/diklat" exact />
+      <DetilDiklat path="/app/master/diklat/:slug" />
+      <Sertifikat path="/app/master/sertifikat" />
+      <Aplikasi path="/app/konfigurasi" />
+      <MyProfile path="/app/profile-saya" />
+
+    </AdminLTE>
+  );
+};
 
 export default App;
