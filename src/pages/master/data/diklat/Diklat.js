@@ -15,6 +15,8 @@ const Diklat = ({ history }) => {
   const [Data, setData] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [LoadingButton, setLoadingButton] = useState(false);
+  const [Bulan, setBulan] = useState('all')
+  const [Jenisnya, setJenisnya] = useState('')
   const [Form, setForm] = useState({
     nama_diklat: '',
     jenis_kegiatan : '',
@@ -102,17 +104,38 @@ const Diklat = ({ history }) => {
               customOptions={
                         Otoritas == 1 ? 
 						<div className='row' style={{marginRight : '0px'}}>
-							<div className='col-xs-6'>
-								<select className="form-control" onChange={(e) => {
-									 window.location.href = `http://apitest.pta-banjarmasin.go.id/public/cetak-laporan-diklat/${e.target.value}`;
+							<div className='col-xs-4'>
+								<select className="form-control" value={Bulan} onChange={(e) => {
+									 setBulan(e.target.value)
 								}}>
-								  <option>Laporan</option>
+								  <option value='all'>Semua Bulan</option>
+								  <option value='01'>Januari</option>
+								  <option value='02'>Februari</option>
+								  <option value='03'>Maret</option>
+								  <option value='04'>April</option>
+								  <option value='05'>Mei</option>
+								  <option value='06'>Juni</option>
+								  <option value='07'>Juli</option>
+								  <option value='08'>Agustus</option>
+								  <option value='09'>Oktober</option>
+								  <option value='10'>November</option>
+								  <option value='11'>Desember</option>
+								</select>
+							</div>
+              <div className='col-xs-4'>
+								<select className="form-control" value={Jenisnya} onChange={(e) => {
+                  if(e.target.value !== ''){
+                    window.location.href = `http://apitest.pta-banjarmasin.go.id/public/cetak-laporan-diklat/${e.target.value}/${Bulan}`;
+                    setJenisnya('')
+                  }
+								}}>
+								  <option value=''>Laporan</option>
 								  <option value='all'>Semua</option>
 								  <option value='diklat'>Diklat</option>
 								  <option value='non-diklat'>Non Diklat</option>
 								</select>
 							</div>
-							<div className='col-xs-4'>
+							<div className='col-xs-3'>
 								<button className="btn btn-info" style={{ marginTop: 2 }} onClick={() => setmodal(true)}>Tambah Kegiatan</button>
 							</div>
 						</div> : null
