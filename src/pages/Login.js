@@ -70,7 +70,7 @@ const Login = ({history}) => {
                         <div className="col-xs-4 col-xs-offset-4">
                             <div className="content_login">
                                 <form>
-                                    <h1 className='login text-center'>LOGIN</h1>
+                                    <h1 className='login text-center'>SI-STUDILA</h1>
                                     <div>
                                         <span className='text_label'>Email</span>
                                         <input  type="text" className={'form-control'} placeholder="Email" required value={Form.email} onChange={(e) => HandleForm(e, 'email')} id="email" />

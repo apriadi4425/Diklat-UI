@@ -66,6 +66,9 @@ const Sertifikat = () => {
      }, []);
     return(
          <div className='full-height'>
+             <div className='untuk_menutupi text-center'>
+          <p className='text_judul'>SI-STUDILA</p>
+        </div>
              <div className='paling_atas'>
              {isViewerOpen && (
                     <ImageViewer

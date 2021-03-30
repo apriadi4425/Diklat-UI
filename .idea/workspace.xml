@@ -20,28 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfb4786a-ffa2-4983-8ac1-283349766927" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/Api/DokumentDiklatController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/Api/DokumentDiklatController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/CetakSuratTugas.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/CetakSuratTugas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Models/DiklatModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Models/DiklatModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Models/PesertaDiklatModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Models/PesertaDiklatModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/public/template/surat_tugas.docx" beforeDir="false" afterPath="$PROJECT_DIR$/api/public/template/surat_tugas.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/adminlte-2-react/node_modules/.bin/uuid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/adminlte-2-react/node_modules/.bin/uuid.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/master/data/diklat/DetilDiklat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/master/data/diklat/DetilDiklat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/master/data/diklat/Diklat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/master/data/diklat/Diklat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/master/data/diklat/Tabs/DokumentasiAcaraTabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/master/data/diklat/Tabs/DokumentasiAcaraTabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/master/data/diklat/Tabs/SuratTugasTabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/master/data/diklat/Tabs/SuratTugasTabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/rebuilds/DashboardV2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/rebuilds/DashboardV2.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,6 +197,8 @@
       <workItem from="1612836139037" duration="4000" />
       <workItem from="1613387950923" duration="990000" />
       <workItem from="1613424176515" duration="892000" />
+      <workItem from="1615199386877" duration="160000" />
+      <workItem from="1615238226437" duration="4000" />
     </task>
     <servers />
   </component>

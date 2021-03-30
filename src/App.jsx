@@ -21,7 +21,7 @@ const { Entry } = Navbar;
 const App = ({ history }) => {
   const { Otoritas, setOtoritas } = useContext(GlobalStateContext);
   return (
-    <AdminLTE title={['PTUN']} browserTitle="Aplikasi" theme="black" footer={<Footer />}>
+    <AdminLTE title={['PTUN']} browserTitle="SI-STUDILA" theme="black" footer={<Footer />}>
 
       <Navbar.Core>
         <Entry

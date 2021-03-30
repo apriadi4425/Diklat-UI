@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
   Content, Col, Row, DataTable, Alert, Box, Button, Inputs,
 } from 'adminlte-2-react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import { GlobalStateContext } from '../../../../GlobalState';
@@ -26,7 +26,7 @@ const Diklat = ({ history }) => {
     tanggal_awal_acara: '',
     tanggal_akhir_acara: '',
   });
-  const { Text } = Inputs;
+  const { Text, Select2 } = Inputs;
 
   const firstColumns = [
     { title: 'Nama', data: 'nama_diklat' },
@@ -90,7 +90,9 @@ const Diklat = ({ history }) => {
 
   return (
     <div className="full-height">
-
+<div className='untuk_menutupi text-center'>
+          <p className='text_judul'>SI-STUDILA</p>
+        </div>
       <Content title="Jurnal Kegiatan">
         <Alert closable type="info" title="Informasi Umum" icon="fa-info">Halaman ini untuk menmabahkan data acara/kegiatan</Alert>
         <Row>
@@ -98,7 +100,22 @@ const Diklat = ({ history }) => {
             <Box
               title="Daftar Kegiatan"
               customOptions={
-                        Otoritas == 1 ? <div><button className="btn btn-info btn-sm" style={{ marginTop: 2 }} onClick={() => setmodal(true)}>Tambah Kegiatan</button></div> : null
+                        Otoritas == 1 ? 
+						<div className='row' style={{marginRight : '0px'}}>
+							<div className='col-xs-6'>
+								<select className="form-control" onChange={(e) => {
+									 window.location.href = `http://apitest.pta-banjarmasin.go.id/public/cetak-laporan-diklat/${e.target.value}`;
+								}}>
+								  <option>Laporan</option>
+								  <option value='all'>Semua</option>
+								  <option value='diklat'>Diklat</option>
+								  <option value='non-diklat'>Non Diklat</option>
+								</select>
+							</div>
+							<div className='col-xs-4'>
+								<button className="btn btn-info" style={{ marginTop: 2 }} onClick={() => setmodal(true)}>Tambah Kegiatan</button>
+							</div>
+						</div> : null
                     }
             >
 
@@ -151,7 +168,22 @@ const Diklat = ({ history }) => {
         show={modal}
       >
         <Text name="nama_diklat" value={Form.nama_diklat} onChange={e => setForm({ ...Form, nama_diklat: e.target.value })} placeholder="Masukan nama kegiatan" label="Nama Kegiatan" labelPosition="above" />
-        <Text name="jenis_kegiatan" value={Form.jenis_kegiatan} onChange={e => setForm({ ...Form, jenis_kegiatan: e.target.value })} placeholder="Masukan jenis kegiatan" label="Jenis Kegiatan" labelPosition="above" />
+        
+        <Select2
+                    labelPosition="above"
+                    placeholder="Pilih Nama Peserta Diklat"
+                    multiple={false}
+                    label={'Jenis Kegiatan'}
+                    options={['Diklat','Non Diklat']}
+                    value={Form.jenis_kegiatan}
+                    onUnselect={({ params: { data } }) => {
+                      setForm({ ...Form, jenis_kegiatan: data })
+                    }}
+                    onSelect={({ params: { data } }) => {
+                      setForm({ ...Form, jenis_kegiatan: data })
+                    }}
+              />
+        
         <Text name="asal_surat_undangan" value={Form.asal_surat_undangan} onChange={e => setForm({ ...Form, asal_surat_undangan: e.target.value })} placeholder="Masukan Asal Surat Undangan" label="Asal Surat Undangan" labelPosition="above" />
         <Text name="nomor_surat_undangan" value={Form.nomor_surat_undangan} onChange={e => setForm({ ...Form, nomor_surat_undangan: e.target.value })} placeholder="Masukan Nomor Surat Undangan" label="Nomor Surat Undangan" labelPosition="above" />
 

@@ -13,6 +13,7 @@ import axios from 'axios'
         name : '', jabatan : '', email : '', pangkat : '', golongan : '', password : '', c_password : '', id : ''
     })
     const [ErrorPass, setErrorPass] = useState(false)
+	const [LoadingHapus, setLoadingHapus] = useState(false)
     const [LoadingButtonTambah, setLoadingButtonTambah] = useState(false)
     const {Text} = Inputs;
 
@@ -88,6 +89,27 @@ import axios from 'axios'
            });
            setLoadingButtonTambah(false)
      }
+	 
+	 const DeleteUser = async (Id) => {
+		  
+		 
+         await axios({
+             method: 'post',
+             url: `${process.env.REACT_APP_BASE_URL}/api/user-delete`,
+             data: {id : Id},
+             headers: {
+                 Accept: 'application/json',
+                 Authorization: `Bearer ${Token}`
+             }
+           }).then(res => {
+                 GetData();
+				 console.log(res)
+           }).catch(function (error) {
+              console.log(error.response)
+           });
+		   setLoadingHapus(false)
+     }
+
 
 
     useEffect(() => {
@@ -115,7 +137,13 @@ import axios from 'axios'
                                         columns={firstColumns.concat([{
                                             title: 'Actions',
                                             data: null,
-                                            render: () => <Button text="Ubah" className="on-click-event" />,
+                                            render: () => (
+												<>
+												<Button text="Ubah" className="on-click-event" />
+												<Button disabled={LoadingHapus} text={LoadingHapus ? 'Loading' : 'Hapus'} className="on-click-event2 btn-danger"/>
+												</>
+											
+											),
                                         }])}
                                         options={{
                                             paging: true,
@@ -131,7 +159,12 @@ import axios from 'axios'
                                                 setForm(data);
                                                 setmodal1(true)
                                             },
+											onClickEvent2: (data, rowIdx, rowData) => {
+                                                DeleteUser(data.id)
+												
+                                            },
                                         }}
+
                                         footer
                                         />
                             }

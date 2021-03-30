@@ -1,6 +1,6 @@
 {
   "name": "adminlte-2-react-examples",
-  "homepage": "http://apriadi4425.github.io/ptun-diklat",
+  "homepage": "http://localhost/diklat/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

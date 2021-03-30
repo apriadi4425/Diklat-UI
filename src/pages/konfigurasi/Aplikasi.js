@@ -75,7 +75,9 @@ const AplikasiKomponent = () => {
 
     return(
         <div className='full-height'>
-           
+           <div className='untuk_menutupi text-center'>
+          <p className='text_judul'>SI-STUDILA</p>
+        </div>
             <Content title="Data Diklat">
                 <Alert closable type="success" title="Konfigurasi Aplikasi" icon="fa-info">Halaman ini untuk mengubah konfigurasi sistem aplikasi</Alert>
                 <Row>

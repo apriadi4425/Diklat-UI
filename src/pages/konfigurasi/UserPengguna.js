@@ -88,6 +88,9 @@ const UserPenggunaKomponent = () => {
     }, [])
     return(
         <div className='full-height'>
+            <div className='untuk_menutupi text-center'>
+          <p className='text_judul'>SI-STUDILA</p>
+        </div>
             <Content title="Data Diklat">
                 <Alert closable type="success" title="Konfigurasi Pengguna" icon="fa-info">Halaman ini untuk mengubah konfigurasi pengguna</Alert>
                 <Row>
